@@ -4,6 +4,7 @@ using namespace std;
 class Animal{
 	public:
 		Animal();
+		string get_name() const;
 		Animal(string speciesName, float animalWeight, bool dangerousness);
 	
 		string name = "";

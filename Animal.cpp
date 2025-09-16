@@ -8,3 +8,6 @@ Animal::Animal(string speciesName, float animalWeight, bool dangerousness) {
 	weight = animalWeight;
 	dangerous = dangerousness;
 }
+string Animal::get_name() const{
+	return name;
+}

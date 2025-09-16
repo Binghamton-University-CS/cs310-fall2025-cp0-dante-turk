@@ -1,22 +1,48 @@
-#include <iostream>
-#include <stdlib.h>
 #include "Animal.h"
 #include "AnimalsInZoo.h"
-using namespace std;
+
+#include <iostream>
 
 int main() {
-   Animal *animal1 = new Animal("African Elephant", 1758);
-   Animal animal2("Giant Panda", 1869);
-   Animal *animal3 = new Animal("Giraffe", 1900);
-   AnimalsInZoo *animals4 = new AnimalsInZoo(*animal1, 1);
+    Animal a{"Aardvark", 100, false};
+    Animal b{"Bear", 1000, true};
+    Animal c{"Crocodile", 600, true};
+    Animal d{"Deer", 80, false};
 
-   delete animal1;
-   animal1 = new Animal("Snow Leopard", 1777);
+    AnimalsInZoo small_zoo;
+    small_zoo.store(a);
+    small_zoo.store(b);
 
-   animal3->display();
-   animal2.display();
-   animal1->display();
-   animals4->display();
+    unsigned int size, capacity;
+    small_zoo.readSizes(size, capacity);
+    cout << "After adding 2 animals, our zoo has " << size << " animals, and can hold " << capacity << " animals total." << endl;
+    small_zoo.show();
 
-   delete animal1;
+    small_zoo.store(c);
+    small_zoo.store(d);
+
+    small_zoo.readSizes(size, capacity);
+    cout << "After adding 2 more animals, our zoo now has " << size << " animals, and can hold " << capacity << " animals total." << endl;
+    small_zoo.show();
+
+    if (Animal bear = small_zoo.find("Bear"); bear.get_name() != "") {
+        cout << "Our zoo contains a bear." << endl;
+    } else {
+        cout << "Our zoo does not contain a bear." << endl;
+    }
+
+    if (small_zoo.remove("Crocodile")) {
+        cout << "Our zoo no longer contains a crocodile." << endl;
+    } else {
+        cout << "Couldn't find a crocodile to remove." << endl;
+    }
+    small_zoo.show();
+
+    small_zoo.store(a);
+    small_zoo.store(b);
+    small_zoo.store(d);
+
+    small_zoo.readSizes(size, capacity);
+    cout << "After adding 3 more animals, our zoo now has " << size << " animals, and can hold " << capacity << " animals total." << endl;
+    small_zoo.show();
 }
